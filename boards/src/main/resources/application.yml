@@ -4,7 +4,8 @@ server:
 spring:
   datasource:
     # url: jdbc:mariadb://mariadb.default.svc.cluster.local:3306/BoardsService # 배포용
-    url: jdbc:mariadb://10.10.8.111:3306/BoardsService                 # 개발용
+    # url: jdbc:mariadb://10.10.8.111:3306/BoardsService                 # 개발용
+    url: 0822c80a-2aff-407d-a23e-1c517f456bd5.internal.kr1.mariadb.rds.nhncloudservice.com
     username: root
     password: P@ssw0rd
   jpa:
