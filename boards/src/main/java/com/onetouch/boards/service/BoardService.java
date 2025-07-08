@@ -32,16 +32,15 @@ public class BoardService {
                 .orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없습니다."));
     }
 
+    // 게시글 작성
     public BoardEntity createBoard(BoardReqDto dto) {
         BoardEntity board = BoardEntity.builder()
-            .title(dto.getTitle())
-            .content(dto.getContent())
-            .authorId(dto.getAuthorId()) // ✅ 이게 맞는 버전
-            .build();
-    return boardRepository.save(board);
+                .title(dto.getTitle())
+                .content(dto.getContent())
+                .authorId(dto.getAuthorId()) // 숫자로 받은 ID 그대로 저장
+                .build();
+        return boardRepository.save(board);
     }
-
-
 
     // 게시글 수정
     public BoardEntity updateBoard(Long id, BoardReqDto dto) {
@@ -58,28 +57,16 @@ public class BoardService {
         return board;
     }
 
-    // 사용자 이름 조회 (users 서비스 호출)
-    public String getUsernameByAuthorId(Integer authorId) {
-        // String url = "http://localhost:8080/users/info/" + authorId; //개발용
-        String url = "http://users.default.svc.cluster.local:8080/users/info/" + authorId;
-        ResponseEntity<UserInfoDto> response =
-                restTemplate.getForEntity(url, UserInfoDto.class);
-        if (response.getBody() == null) {
-            throw new RuntimeException("작성자 정보 조회 실패");
-        }
-        return response.getBody().getUsername();
-    }
-
+    // 사용자 이름 → ID 변환 (필요한 경우 사용)
     public Integer getAuthorIdByUsername(String username) {
-    try {
-        ResponseEntity<UserInfoDto> response = restTemplate.getForEntity(
-            "http://users.default.svc.cluster.local:8080/api/users/username/" + username,
-            UserInfoDto.class
-        );
-        return response.getBody().getId();
-    } catch (Exception e) {
-        throw new RuntimeException("작성자 조회 실패: " + username);
+        try {
+            ResponseEntity<UserInfoDto> response = restTemplate.getForEntity(
+                    "http://users.default.svc.cluster.local:8080/api/users/username/" + username,
+                    UserInfoDto.class
+            );
+            return response.getBody().getId();
+        } catch (Exception e) {
+            throw new RuntimeException("작성자 조회 실패: " + username);
+        }
     }
-}
-
 }
