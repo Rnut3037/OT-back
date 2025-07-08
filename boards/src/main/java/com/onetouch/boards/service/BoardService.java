@@ -63,8 +63,8 @@ public class BoardService {
 
     // 사용자 이름 조회 (users 서비스 호출)
     public String getUsernameByAuthorId(Integer authorId) {
-        String url = "http://localhost:8080/users/info/" + authorId; //개발용
-        // String url = "백엔드 pod 주소:8080/users/info/" + authorId; 배포용
+        // String url = "http://localhost:8080/users/info/" + authorId; //개발용
+        String url = "http://users.default.svc.cluster.local:8080/users/info/" + authorId;
         ResponseEntity<UserInfoDto> response =
                 restTemplate.getForEntity(url, UserInfoDto.class);
         if (response.getBody() == null) {
