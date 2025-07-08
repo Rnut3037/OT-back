@@ -32,15 +32,15 @@ public class BoardService {
                 .orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없습니다."));
     }
 
-    // 게시글 작성
     public BoardEntity createBoard(BoardReqDto dto) {
-    BoardEntity board = BoardEntity.builder()
-        .title(dto.getTitle())
-        .content(dto.getContent())
-        .authorId(dto.getAuthorId())  // authorId 그대로 사용
-        .build();
-
+        BoardEntity board = BoardEntity.builder()
+            .title(dto.getTitle())
+            .content(dto.getContent())
+            .authorId(dto.getAuthorId()) // ✅ 이게 맞는 버전
+            .build();
     return boardRepository.save(board);
+}
+
 }
 
     // 게시글 수정
