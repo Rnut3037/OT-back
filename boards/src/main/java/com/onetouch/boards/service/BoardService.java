@@ -72,4 +72,17 @@ public class BoardService {
         }
         return response.getBody().getUsername();
     }
+
+    public Integer getAuthorIdByUsername(String username) {
+    try {
+        ResponseEntity<UserInfoDto> response = restTemplate.getForEntity(
+            "http://users.default.svc.cluster.local:8080/api/users/username/" + username,
+            UserInfoDto.class
+        );
+        return response.getBody().getId();
+    } catch (Exception e) {
+        throw new RuntimeException("작성자 조회 실패: " + username);
+    }
+}
+
 }
