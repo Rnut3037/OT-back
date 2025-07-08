@@ -39,9 +39,9 @@ public class BoardService {
             .authorId(dto.getAuthorId()) // ✅ 이게 맞는 버전
             .build();
     return boardRepository.save(board);
-}
+    }
 
-}
+
 
     // 게시글 수정
     public BoardEntity updateBoard(Long id, BoardReqDto dto) {
