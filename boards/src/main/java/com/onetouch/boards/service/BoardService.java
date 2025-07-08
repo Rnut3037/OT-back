@@ -34,13 +34,10 @@ public class BoardService {
 
     // 게시글 작성
     public BoardEntity createBoard(BoardReqDto dto) {
-    // username → authorId 조회 (Users 서비스 호출)
-    Integer authorId = getAuthorIdByUsername(dto.getAuthorUsername());
-
     BoardEntity board = BoardEntity.builder()
         .title(dto.getTitle())
         .content(dto.getContent())
-        .authorId(authorId)
+        .authorId(dto.getAuthorId())  // authorId 그대로 사용
         .build();
 
     return boardRepository.save(board);
