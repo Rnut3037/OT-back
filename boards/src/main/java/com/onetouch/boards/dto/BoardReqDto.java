@@ -7,5 +7,5 @@ import lombok.Setter;
 public class BoardReqDto {
     private String title;
     private String content;
-    private Integer authorId; 
+    private String authorUsername;  
 }
