@@ -3,7 +3,8 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mariadb://6fb21019-440b-4ad8-b69e-d9adc45c2c9b.internal.kr1.mariadb.rds.nhncloudservice.com:3306/UsersService
+    # url: jdbc:mariadb://6fb21019-440b-4ad8-b69e-d9adc45c2c9b.internal.kr1.mariadb.rds.nhncloudservice.com:3306/UsersService
+    url: jdbc:mariadb://10.22.1.87:3306/UsersService
     username: MSA_User
     password: P@ssw0rd
     driver-class-name: org.mariadb.jdbc.Driver
