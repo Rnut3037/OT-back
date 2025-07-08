@@ -34,17 +34,17 @@ public class BoardService {
 
     // 게시글 작성
     public BoardEntity createBoard(BoardReqDto dto) {
-        // 작성자 존재 확인 (users 서비스 호출)
-        getUsernameByAuthorId(dto.getAuthorId()); // 존재하지 않으면 예외
+    // username → authorId 조회 (Users 서비스 호출)
+    Integer authorId = getAuthorIdByUsername(dto.getAuthorUsername());
 
-        BoardEntity board = BoardEntity.builder()
-                .title(dto.getTitle())
-                .content(dto.getContent())
-                .authorId(dto.getAuthorId())
-                .build();
+    BoardEntity board = BoardEntity.builder()
+        .title(dto.getTitle())
+        .content(dto.getContent())
+        .authorId(authorId)
+        .build();
 
-        return boardRepository.save(board);
-    }
+    return boardRepository.save(board);
+}
 
     // 게시글 수정
     public BoardEntity updateBoard(Long id, BoardReqDto dto) {
